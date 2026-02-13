@@ -1,0 +1,24 @@
+{
+  "name": "HLTV Fantasy Values",
+  "description": "A browser extension to give a single value for players in HLTV fantasy leagues",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "homepage_url": "https://github.com/zzzealed/hltv-fantasy-values",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-script.js"
+      ],
+      "matches": [
+        "https://www.hltv.org/fantasy/*/league/*/team/*",
+        "https://www.hltv.org/fantasy/*/league/*/team/*/edit"
+      ]
+    }
+  ]
+}
