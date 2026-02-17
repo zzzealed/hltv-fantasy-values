@@ -16,7 +16,7 @@ Google's piece of shit age verification system doesn't let my account sign up as
 3. Drag-and-drop the `.crx`-file onto the page
 
 ### Firefox
-![https://addons.mozilla.org/firefox/addon/hltv-fantasy-values](https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png)
+[![Mozilla Add-on link](https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png)](https://addons.mozilla.org/firefox/addon/hltv-fantasy-values)
 
 Or manually:
 1. Go to [Releases](‎github.com/zzzealed/hltv-fantasy-values/releases/latest) and download the latest `.xpi`-file
