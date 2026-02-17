@@ -8,13 +8,17 @@ My [formula](content-script.js#L24) is quite simple. Just `rating / price * 1000
 It can then help give an overview of which players are over/under-priced, and if you're as smart as me you might just get top 80%.
 
 ## Installation
-I haven't uploaded to official extension stores yet, so you'll have to sideload them.
+Google's piece of shit age verification system doesn't let my account sign up as a dev, so you have to install manually on Chrome.
+
 ### Chrome
 1. Go to [Releases](‎github.com/zzzealed/hltv-fantasy-values/releases/latest) and download the latest `.crx`-file
 2. Open `chrome://extensions`
 3. Drag-and-drop the `.crx`-file onto the page
 
 ### Firefox
+![https://addons.mozilla.org/firefox/addon/hltv-fantasy-values](https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png)
+
+Or manually:
 1. Go to [Releases](‎github.com/zzzealed/hltv-fantasy-values/releases/latest) and download the latest `.xpi`-file
 2. Open `about:addons` and press the cog -> Install Add-on From File...
 3. Select the downloaded `.xpi`-file
