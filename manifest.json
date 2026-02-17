@@ -1,7 +1,7 @@
 {
   "name": "HLTV Fantasy Values",
   "description": "A browser extension to give a single value for players in HLTV fantasy leagues",
-  "version": "1.0",
+  "version": "2.0",
   "manifest_version": 3,
   "browser_specific_settings": {
     "gecko": {
