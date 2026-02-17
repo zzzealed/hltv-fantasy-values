@@ -22,5 +22,5 @@ I haven't uploaded to official extension stores yet, so you'll have to sideload 
 ## TODOs
 - [ ] Color code values
 - [ ] Re-center price-text
-- [ ] Check if extension actually works when originally making lineup and not just after editing
-- [ ] Fix issue where you need to refresh edit-page
+- [x] Check if extension actually works when originally making lineup and not just after editing
+- [x] Fix issue where you need to refresh edit-page
