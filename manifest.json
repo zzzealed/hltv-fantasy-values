@@ -27,8 +27,7 @@
         "content-script.js"
       ],
       "matches": [
-        "https://www.hltv.org/fantasy/*/league/*/team/*",
-        "https://www.hltv.org/fantasy/*/league/*/team/*/edit"
+        "https://www.hltv.org/fantasy/*"
       ]
     }
   ]
