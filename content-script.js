@@ -1,26 +1,23 @@
-// Log that we are running
 console.log("HLTV Fantasy Values extension running!");
 
 // Create MutationObserver since this content is loaded dynamically, or some bullshit
 const observer = new MutationObserver(() => {
-  // Look at class "teamPlayers" since all the playercards, that aren't added to your deck, has this
-  const teamPlayers = document.querySelectorAll("div.teamPlayer");
-  // If NodeList of teamPlayers contains anything, disconnect observer and run main
+  const teamPlayers = document.querySelectorAll("div.teamPlayer"); // All players outside deck has "teamPlayer" class
+  const pickedPlayers = document.querySelectorAll("div.picked"); // All players inside deck has "picked" class
+  // If NodeList of teamPlayers contains anything, disconnect observer and run functions
   if (teamPlayers.length > 0) {
     observer.disconnect();
-    main(teamPlayers);
+    addValues(teamPlayers);
+    addCollectiveRating(pickedPlayers);
   };
 });
-
-// This is really just the rules for the MutationObserver above
 observer.observe(document.body, {
   childList: true, // This checks if elements are added
   subtree: true // This checks all nested elements, which we need cause everything is fucking nested divs
 });
 
-// Main function; does the math and appends the "value"-div
-function main(teamPlayers) {
- console.log("Running main");
+function addValues(teamPlayers) {
+  //console.log("Running addValues");
   // For each entry in `teamPlayers`, get these two divs
   teamPlayers.forEach(player => {
     const statDiv = player.querySelector("div.player-card-stats")?.textContent;
@@ -49,4 +46,27 @@ function main(teamPlayers) {
       playerButton.appendChild(valueDiv);
     };
   });
+};
+
+// TODO: make function for finding and stripping rating, to reuse
+
+function addCollectiveRating(pickedPlayers) {
+  console.log("Running addCollectiveRating");
+  const ratings = [];
+  pickedPlayers.forEach(player => {
+    const statDiv = player.querySelector("div.player-card-stats")?.textContent;
+    ratings.push(parseFloat(statDiv.match(/Rating([\d.]+)/)?.[1])); // I do not understand regex
+  });
+  let collectiveRating = 0;
+  for (const rating of ratings) {
+    collectiveRating += rating;
+  };
+  const collectiveRatingDiv = document.createElement("div");
+  collectiveRatingDiv.className = "collectiveRating";
+  collectiveRatingDiv.textContent = `Collective rating: ${collectiveRating}`;
+  const remainingBudget = document.querySelector("div.remainingBudget");
+  const saveButton = remainingBudget.querySelector("button.saveButton");
+  if (remainingBudget) {
+    remainingBudget.insertBefore(collectiveRatingDiv, saveButton);
+  };
 };
