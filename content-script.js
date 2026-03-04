@@ -28,19 +28,30 @@ const observer = new MutationObserver(() => {
 })
 observer.observe(document.body, { childList: true, subtree: true }); // We use childList and subtree for all observers since all the divs are nested
 
+
+function parseRating(player) {
+  const statDiv = player.querySelector("div.player-card-stats")?.textContent; // Use ? so we get undefined if querySelector can't find the div. Avoids crash
+  const rating = parseFloat(statDiv?.match(/Rating([\d.]+)/)?.[1]); // I do not understand regex
+  return rating;
+}
+
+
+function parsePrice(player) {
+  const buttonDiv = player.querySelector("div.playerButtonText")?.textContent;
+  const price = parseInt(buttonDiv.replace(/[$,]/g, '')); // Again whats going on I hate regex
+  return price;
+}
+
+
 function addValues(teamPlayer) {
   console.log("addValues");
 
-  // TODO: use for of instead of forEach
-  teamPlayer.forEach(player => {
-    const statDiv = player.querySelector("div.player-card-stats")?.textContent;
-    const buttonDiv = player.querySelector("div.playerButtonText")?.textContent;
+  // Use parseRating on each player's div
+  for (const player of teamPlayer) {
+    const rating = parseRating(player);
+    const price = parsePrice(player);
 
-    // Strip and format, respectively, so we get pure numbers we can work with
-    const rating = parseFloat(statDiv.match(/Rating([\d.]+)/)?.[1]); // I do not understand regex
-    const price = parseInt(buttonDiv.replace(/[$,]/g, '')); // Again, what's going on?
-
-    // Super simple formula; divide rating 3.0 with their price and multiply by 100.000 to get a number that's easier to work with
+    // Calculate "value"
     const value = rating / price * 100000;
 
     // Create our `valueDiv` to display our "value" on the page
@@ -63,32 +74,31 @@ function addValues(teamPlayer) {
       valueDiv.style.right = "8px";
       playerButton.appendChild(valueDiv);
     }
-  })
+  }
 }
+
 
 function updateCombinedRating(picked) {
   console.log("updateCombinedRating");
-  const ratings = [];
-  for (const player of picked) {
-    const statDiv = player.querySelector("div.player-card-stats")?.textContent;
-    if (!statDiv) return;
-    ratings.push(parseFloat(statDiv.match(/^Rating([\d.]+)/)?.[1]));
-  }
 
-  // Add all ratings together
   let combinedRating = 0;
-  for (const rating of ratings) {
-    combinedRating += rating;
+  for (const player of picked) {
+    const rating = parseRating(player);
+
+    // If rating is not NaN we use it to caluclate combinedRating
+    if (!isNaN(rating)) {
+      combinedRating += rating;
+    }
+
+    // Remove potential previous 
+    const remainingBudget = document.querySelector("div.remainingBudget"); // We use document because it's outside "picked" div
+    remainingBudget.querySelector("div.combinedRating")?.remove(); // Remove potential previous combinedRating div
+  
+    // Make div and add combinedRatingDiv
+    const combinedRatingDiv = document.createElement("div");
+    combinedRatingDiv.className = "combinedRating";
+    combinedRatingDiv.textContent = `Combined rating: ${combinedRating.toFixed(2)}`; // Round to 2 decimals. Don't know why it's even needed
+    const saveButton = remainingBudget.querySelector("button.saveButton");
+    remainingBudget.insertBefore(combinedRatingDiv, saveButton); // Insert before saveButton so layout isn't messed up
   }
-
-  // Remove potential previous 
-  const remainingBudget = document.querySelector("div.remainingBudget");
-  remainingBudget.querySelector("div.combinedRating")?.remove(); // Remove potential previous combinedRating div
-
-  // Make and add combinedRatingDiv
-  const combinedRatingDiv = document.createElement("div");
-  combinedRatingDiv.className = "combinedRating";
-  combinedRatingDiv.textContent = `Combined rating: ${combinedRating.toFixed(2)}`; // Round to 2 decimals. Don't know why it's even needed
-  const saveButton = remainingBudget.querySelector("button.saveButton");
-  remainingBudget.insertBefore(combinedRatingDiv, saveButton);
 }

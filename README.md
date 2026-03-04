@@ -30,4 +30,4 @@ Or manually:
 - [x] Check if extension actually works when originally making lineup and not just after editing
 - [ ] Fix issue where you need to refresh edit-page
 - [ ] Add value to picked player's buttons
-- [ ] Add combined value of picked roster
+- [x] Add combined value of picked roster
