@@ -25,7 +25,7 @@ Or manually:
 
 ## TODOs
 - [ ] Color code values
-- [ ] Re-center price-text
+- [x] Re-center price-text
 - [x] Check if extension actually works when originally making lineup and not just after editing
 - [ ] Fix issue where you need to refresh edit-page
 - [ ] Add value to picked player's buttons

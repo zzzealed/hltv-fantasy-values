@@ -34,10 +34,19 @@ function main(teamPlayers) {
     const valueDiv = document.createElement("div");
     valueDiv.className = "playerValue";
     valueDiv.textContent = `${value.toFixed(3)}`; // Round to 3 decimals so our button isn't filled lol
+    // Set margin-right for price text
+    const playerButtonText = player.querySelector("div.playerButtonText");
+    if (playerButtonText) {
+      playerButtonText.style.marginRight = "13.7188px"; // Same width as playerButtonIcon
+    };
     // Finally append "valueDiv" under "playerButton"
     const playerButton = player.querySelector("button.playerButton"); // This is the last time we are finding an element
-      if (playerButton) {
-        playerButton.appendChild(valueDiv); // TODO: adjust padding/flex so the price on the button is centered again
+    if (playerButton) {
+      // I have no idea why but this looks right
+      playerButton.style.position = "relative";
+      valueDiv.style.position = "absolute";
+      valueDiv.style.right = "8px";
+      playerButton.appendChild(valueDiv);
     };
   });
 };
