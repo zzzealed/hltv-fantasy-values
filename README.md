@@ -27,4 +27,6 @@ Or manually:
 - [ ] Color code values
 - [ ] Re-center price-text
 - [x] Check if extension actually works when originally making lineup and not just after editing
-- [x] Fix issue where you need to refresh edit-page
+- [ ] Fix issue where you need to refresh edit-page
+- [ ] Add value to picked player's buttons
+- [ ] Add combined value of picked roster
