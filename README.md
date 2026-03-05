@@ -12,7 +12,7 @@ It can then help give an overview of which players are over/under-priced, and if
 Google's piece of shit age verification system doesn't let my account sign up as a dev, so you have to install manually on Chrome.
 
 ### Chrome
-1. Go to [Releases](https://github.com/zzzealed/hltv-fantasy-values/releases/latest) and download the latest `.crx`-file
+1. Go to [Releases](https://github.com/zzzealed/hltv-fantasy-values/releases/latest) and download the latest `.crx`-file (or the `.zip`-file)
 2. Open `chrome://extensions`
 3. Drag-and-drop the `.crx`-file onto the page
 
@@ -20,7 +20,7 @@ Google's piece of shit age verification system doesn't let my account sign up as
 [![Mozilla Add-on link](https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png)](https://addons.mozilla.org/firefox/addon/hltv-fantasy-values)
 
 Or manually:
-1. Go to [Releases](https://github.com/zzzealed/hltv-fantasy-values/releases/latest) and download the latest `.xpi`-file
+1. Go to [Releases](https://github.com/zzzealed/hltv-fantasy-values/releases/latest) and download the latest `.xpi`-file (or the `.zip`-file)
 2. Open `about:addons` and press the cog -> Install Add-on From File...
 3. Select the downloaded `.xpi`-file
 
@@ -28,7 +28,6 @@ Or manually:
 - [ ] Color code values
 - [x] Re-center price text
 - [ ] Update screenshot with re-centered price text
-- [x] Check if extension actually works when originally making lineup and not just after editing
 - [ ] Fix issue where you need to refresh edit-page
 - [ ] Add value to picked player's buttons
 - [x] Add combined value of picked roster
