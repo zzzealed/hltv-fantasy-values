@@ -27,7 +27,7 @@ Or manually:
 ## TODOs
 - [ ] Color code values
 - [x] Re-center price text
-- [ ] Update screenshot with re-centered price text
-- [ ] Fix issue where you need to refresh edit-page
+- [x] Update screenshot with re-centered price text
+- [x] Fix issue where you need to refresh edit-page
 - [ ] Add value to picked player's buttons
 - [x] Add combined value of picked roster

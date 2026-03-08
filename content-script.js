@@ -1,43 +1,39 @@
 console.log("HLTV Fantasy Values extension running!");
 
 const observer = new MutationObserver(() => {
-  const pickedCon = document.querySelector("div.pickedCon");
   const teamCons = document.querySelectorAll("div.teamCon");
+  const pickedCon = document.querySelector("div.pickedCon");
 
-  if (teamCons) {
-    for (const teamCon of teamCons) { // We iterate through each since we can't use .observe on a NodeList
-      const teamConObserver = new MutationObserver(() => {
-        const teamPlayers = teamCon.querySelectorAll("div.teamPlayer");
-        teamConObserver.disconnect();
-        addValues(teamPlayers);
-      })
-      teamConObserver.observe(teamCon, { childList: true, subtree: true });
+  if (teamCons.length > 0 && pickedCon) { // Use .length on teamCons so we don't get null if it's empty
+    // We stop looking at entire DOM
+    observer.disconnect();
+
+    // We iterate through each since we can't use .observe on a NodeList
+    for (const teamCon of teamCons) {
+      addValues(teamCon.querySelectorAll("div.teamPlayer"));
     }
-  }
 
-  if (pickedCon) {
+    // Run on init with whatever is there
+    updateCombinedRating(pickedCon.querySelectorAll("div.picked"));
+    // Then watch for changes with new and more focused MutationObserver
     pickedConObserver = new MutationObserver(() => {
-      const picked = pickedCon.querySelectorAll("div.picked");
-      updateCombinedRating(picked);
+      updateCombinedRating(pickedCon.querySelectorAll("div.picked"));
     })
     pickedConObserver.observe(pickedCon, { childList: true, subtree: true });
   }
-
-  observer.disconnect(); // We just disconnect after looking, fuck it
-
 })
-observer.observe(document.body, { childList: true, subtree: true }); // We use childList and subtree for all observers since all the divs are nested
+observer.observe(document.body, { childList: true, subtree: true });
 
 
 function parseRating(player) {
-  const statDiv = player.querySelector("div.player-card-stats")?.textContent; // Use ? so we get undefined if querySelector can't find the div. Avoids crash
+  const statDiv = player.querySelector("div.player-card-stats")?.textContent;
   const rating = parseFloat(statDiv?.match(/Rating([\d.]+)/)?.[1]); // I do not understand regex
   return rating;
 }
 
 
 function parsePrice(player) {
-  const buttonDiv = player.querySelector("div.playerButtonText")?.textContent;
+  const buttonDiv = player.querySelector("div.playerButtonText").textContent;
   const price = parseInt(buttonDiv.replace(/[$,]/g, '')); // Again whats going on I hate regex
   return price;
 }
@@ -85,7 +81,7 @@ function updateCombinedRating(picked) {
   for (const player of picked) {
     const rating = parseRating(player);
 
-    // If rating is not NaN we use it to caluclate combinedRating
+    // If rating is NOT NaN we use it to caluclate combinedRating
     if (!isNaN(rating)) {
       combinedRating += rating;
     }
