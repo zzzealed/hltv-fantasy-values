@@ -4,9 +4,10 @@ A browser extension to give a single value for players in HLTV fantasy leagues.
 ![A screenshot, notice the decimal number to the right of the price](images/screenshot.png)
 
 The extension appends a decimal number that represents the "value" or bang-for-your-buck the player offers. \
-Now it also shows a combined rating from all your picked players. \
 My [formula](content-script.js#L55) is quite simple. Just `rating / price * 100000`. \
 It can then help give an overview of which players are over/under-priced, and if you're as smart as me you might just get top 80%.
+
+Now it also shows a combined rating from all your picked players.
 
 ## Installation
 Google's piece of shit age verification system doesn't let my account sign up as a dev, so you have to install manually on Chrome.
